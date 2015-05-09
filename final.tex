@@ -6,65 +6,99 @@
 \usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
 \usepackage{hyperref}
 \usepackage{multirow}
+\usepackage{framed}
 \usepackage{enumerate}
 \pagenumbering{arabic}
 \setlength{\columnsep}{0.25in}
+\usepackage{paralist}
+\let\itemize\compactitem
 
-\title{\bf{MicroswiftOS : A Minimal OS for Cloud Computing}}
+\def\bfw{\mathbf w}
+\def\bfW{\mathbf W}
+\def\bfD{\mathbf D}
+\def\bfY{\mathbf Y}
+\def\bfX{\mathbf X}
+\def\bfU{\mathbf U}
+\def\bfV{\mathbf V}
+\def\bfS{\mathbf \Sigma}
+\def\bfx{\mathbf x}
+\def\R{\mathbb R}
+\def\F{\mathrm F}
+
+\title{\bf{Twitter hashtag implication using various machine learning methods}}
 \author{
-  Menghui Wang\\
+  Chang Wang\\
   Department of Computer Sciences\\
-  \texttt{menghui@cs.wisc.edu}
+  \texttt{wych92@cs.wisc.edu}
   \and
-  Yiran Wang\\
+  Lichao Yin\\
   Department of Computer Sciences\\
-  \texttt{yiran@cs.wisc.edu}
+  \texttt{lyin28@wisc.edu}
   \and
   Chaowen Yu\\
   Department of Computer Sciences\\
   \texttt{ycw@cs.wisc.edu}
   \and
-  Junhan Zhu\\
-  Electrical and Computer Engineering\\
-  \texttt{jzhu84@wisc.edu}
+  Biao Zhang\\
+  Department of Computer Sciences\\
+  \texttt{bzhang263@wisc.edu}
 }
-\date{May 3, 2015}
+\date{May 9, 2015}
 \begin{document}
 \twocolumn[
 \maketitle
-\draft
 ]
 \begin{abstract}
-aa
+\textbf{keywords}: text classification
 \end{abstract}
 
-% \begin{multicols}{2}
-%\category{B.3.2}{Hardware}{Memory Structure\----\textit{Cache Memories}}
-
-%\terms{}
-
-%\keywords{}
 
 \section{Introduction}
 \label{sec:intro}
-aa
 
-% \begin{figure}[!htb]
-% \centering
-% \includegraphics[width=3.4in]{graphs.pdf}
-% \caption{\label{fig:structure}MicroswiftOS structure}
-% \end{figure}
 
-\section{Motivations}
-\label{sec:moti}
 
-\section{Analysis and Methodologies}
-\label{sec:micro}
+\section{Data Preparation}
+\label{sec:data}
+\subsection{Data Collection}
+\subsection{Data Preprocessing}
+After above steps, we get 5000 tweets with corresponding hashtags like this:
+\begin{framed}
+The House of Black and White - The Wars to Come - \#gameofthrones \#got \#got5 \#e2s5  \#hbo $\backslash$u2026 https://t.co/6zrQXilrZe
+\end{framed}
+It is obvious that \emph{http://}, \emph{$\backslash$u2026} and \emph{\#gameofthrones} do little contribution to classification. So we find them out through 5000 tweets and remove them. For convinience, we then remove all non-alphanumeric characters and turn all letters to lowercase. Thus the example tweet turns to be:
+\begin{framed}
+the house of black and white the wars to come
+\end{framed}
+Because computer usually fails to capture semantic information from human languages, it is common to represent a text as a vector corresponding to the terms(usually terms are words) that appear in the text. For our problem, we will use bag-of-words model. Here we define the following terms as denoted as \cite{blei2003latent}:
+\begin{itemize}
+\item A \emph{term} is the basic unit of discrete data denoted by $w$, which is usually a word appearing in a tweet.
+\item A \emph{tweet} contains $N$ terms, denoted by $\bfw = (w_1, w_2, \dots, w_N)$.
+\item A \emph{corpus} is a collection of $M$ tweets($M=5000$). The tweets texts are denoted by $\bfD = \{\bfw_1, \bfw_2, \dots, \bfw_M\}$, and their corresponding tag labels are denoted by $\bfY = \{y_1, y_2, \dots, y_M\}$ where $y_i \in \{1, 2, 3, 4, 5\}, i = 1, 2, \dots, M$. For our problem, 1 stands for the hashtag "", 2 stands for the hashtag "", 3 stands for the hashtag "", 4 stands for the hashtag "", and 5 stands for the hashtag "".
+\item A \emph{dictionary} is a collection of all $V$ unique terms appearing in the corpus denoted by $\bfW = \{w_1^*, w_2^*, \dots, w_V^*\}$.
+\end{itemize}
+Let $\bfX$ be a term-tweet matrix. This matrix has $M$ rows(one row for each tweets) and $V$ columns(one column for each unique term in dictionary). The element $x_{ij}$ in $\bfX$ indicates whether the $j$-th term appears in the $i$-th tweet. If it does appear, $x_{ij} = 1$; otherwise $x_{ij} = 0$.\\
+In general, because most tweets will just use a small part of terms in the dictionary, a lot of $x_{ij}$ will be zero. So the matrix $\bfX$ is sparse. However, a sparse $\bfX$ wastes too much space and processes much slower in high dimension. As we know, there are some high-frequency terms appearing in all documents, such as function words(e.g., \emph{a}, \emph{or}, \emph{on}) and pronouns(e.g., \emph{which}, \emph{it}, \emph{those}). These terms have little contribution to representing different documents because of relatively low information content, so we shall remove them from our dictionary. \cite{salton1971smart} developed a SMART system with a popular list of more than 500 common terms, which called \emph{stop-word list} and can be used for our model.\\
+After removing \emph{stop-words}, our final $\bfX$ has 5000 rows for tweets and 9791 columns for unique terms, and $\bfY$ has 5000 rows for each tweet's tag label.
+\subsection{Cross Validation}
+We will use stratified sampling for cross validation.\\
+Since we have 1000 tweets for every 5 hashtags. We equally split each 1000 hashtag tweets into 5 parts. And each time we select and combine 4 parts from every hashtags for training and the rest part for testing.\\
+Therefore, we have 5 datasets in all. Each dataset has training matricies: $\bfX_{training} \in \R^{4000 \times 9791}$ and $\bfY_{training} \in \{1, 2, 3, 4, 5\}^{4000}$, and testing matrices $\bfX_{testing} \in \R^{1000 \times 9791}$ and $\bfY_{testing} \in \{1, 2, 3, 4, 5\}^{1000}$.
 
 \section{Implementation}
 \label{sec:impl}
+\subsection{Decision Tree}
+To lean a multi-class decision tree, we use the implementation from scikit-learn 1.6.1. scikit-learn uses an optimised version of the CART algorithm.\\
+\subsection{Random Forest}
 
-\section{Evaluation}
+\subsection{Neural Network}
+\subsection{Naive Bayes}
+\subsection{Support Vector Machine}
+\subsection{Logistic Regression Model}
+\subsection{$k$ Nearest Neighbors}
+
+
+\section{Results}
 \label{sec:eval}
 % \begin{figure}[!htb]
 % \centering
@@ -224,3 +258,4 @@ We would like to thank Michael Swift, Sanketh Nalli and Zhaoyu Luo for their hel
 % \caption{Speedup and miss rate of workloads relative to baseline. Ths miss rate is a relative ratio compared with baseline miss rate.}
 % \label{table:missrate}
 % \end{table*}
+
