@@ -1,0 +1,226 @@
+\documentclass[letterpaper,11pt,twocolumn]{article}
+\include{template}
+\usepackage{multicol}
+\usepackage{fullpage}
+\usepackage{url}
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{enumerate}
+\pagenumbering{arabic}
+\setlength{\columnsep}{0.25in}
+
+\title{\bf{MicroswiftOS : A Minimal OS for Cloud Computing}}
+\author{
+  Menghui Wang\\
+  Department of Computer Sciences\\
+  \texttt{menghui@cs.wisc.edu}
+  \and
+  Yiran Wang\\
+  Department of Computer Sciences\\
+  \texttt{yiran@cs.wisc.edu}
+  \and
+  Chaowen Yu\\
+  Department of Computer Sciences\\
+  \texttt{ycw@cs.wisc.edu}
+  \and
+  Junhan Zhu\\
+  Electrical and Computer Engineering\\
+  \texttt{jzhu84@wisc.edu}
+}
+\date{May 3, 2015}
+\begin{document}
+\twocolumn[
+\maketitle
+\draft
+]
+\begin{abstract}
+aa
+\end{abstract}
+
+% \begin{multicols}{2}
+%\category{B.3.2}{Hardware}{Memory Structure\----\textit{Cache Memories}}
+
+%\terms{}
+
+%\keywords{}
+
+\section{Introduction}
+\label{sec:intro}
+aa
+
+% \begin{figure}[!htb]
+% \centering
+% \includegraphics[width=3.4in]{graphs.pdf}
+% \caption{\label{fig:structure}MicroswiftOS structure}
+% \end{figure}
+
+\section{Motivations}
+\label{sec:moti}
+
+\section{Analysis and Methodologies}
+\label{sec:micro}
+
+\section{Implementation}
+\label{sec:impl}
+
+\section{Evaluation}
+\label{sec:eval}
+% \begin{figure}[!htb]
+% \centering
+% \epsfig{file=evaluation.eps, width=3.4in}
+% \caption{Boot-up time for various configurations}
+% \label{figure:eval}
+% \end{figure}
+
+% \begin{figure*}[!htb]
+% \centering
+% \epsfig{file=latencies.eps, width=6.8in}
+% \caption{Latencies for various IPC methods on MicroswiftOS and archlinux}
+% \label{figure:latency}
+% \end{figure*}
+
+% \begin{figure*}[!htb]
+% \centering
+% \epsfig{file=throughput.eps, width=6.8in}
+% \caption{Throughputs for various IPC methods on MicroswiftOS and archlinux}
+% \label{figure:throughput}
+% \end{figure*}
+
+\section{Related Works}
+\label{sec:related}
+\section{Future Work}
+\label{sec:future}
+
+\section{Acknowledgement}
+We would like to thank Michael Swift, Sanketh Nalli and Zhaoyu Luo for their helpful advices and comments. 
+
+
+
+% \bibliographystyle{abbrv}
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}
+
+% \begin{table}[!htb]
+% \centering
+% \begin{tabular}{|c||c|c|c|}
+% \hline
+% \multirow{3}{*}{\textbf{Benchmark}} & \textbf{Additional} & \textbf{Total} &\multirow{3}{*}{\textbf{Percentage}}\\ 
+% &\textbf{Memory} &\textbf{Memory}&\\
+% &\textbf{Accesses} &\textbf{Accesses} &\\ \hline \hline
+% aster & 175481 & 2404970 & 0.0730\\ \hline 
+% bzip2 & 1067380 & 9188892 & 0.1162\\ \hline 
+% lbm   & 130990 & 5003775 & 0.0262\\ \hline 
+% libquantum   & 54796 & 3092800 & 0.0177\\ \hline 
+% milc  & 136746 & 5575859 & 0.0245\\ \hline 
+% omnetpp  & 107165 & 287076 & 0.3733\\ \hline 
+% \textbf{Average} & \textbf{-} &\textbf{- } &\textbf{0.1051}\\ \hline
+% \end{tabular}
+% \caption{Additional memory accesses for storing reuse data in a 1MB L2 reuse cache during a simulation period of 300M instructions}
+% \label{table:additionalaccess}
+% \end{table}
+
+% \begin{figure}[!htb]
+% \centering
+% \epsfig{file=ReuseStruct.eps, height =2in, width =2in}
+% \caption{Structure of our implementation for the reuse cache}
+% \label{reuse:struct}
+% \end{figure}
+
+% \begin{table}[!htb]
+% \centering
+% \begin{tabular}{|c||c|c|c|}
+% \hline
+% \multirow{3}{*}{\textbf{benchmark}} & \textbf{memory} & \textbf{total} & \multirow{3}{*}{\textbf{percentage}}\\
+% &\textbf{write} &\textbf{memory} &\\
+% & \textbf{miss times} & \textbf{access times} & \\ \hline\hline
+% bzip2 & 778893 & 16791412 & 0.0464\\ \hline 
+% aster & 83555 & 4487131 & 0.0186\\ \hline 
+% libquantum & 35243 & 6091860 & 0.0058\\ \hline 
+% lbm & 72942 & 9862259 & 0.0074\\ \hline 
+% milc & 69407 & 10820712 & 0.0064\\ \hline 
+% omnetpp & 83508 & 416317 & 0.2006 \\ \hline
+
+% \textbf{Average} &\textbf{-} &\textbf{-} &\textbf{0.0475}\\
+
+% \hline
+% \end{tabular}
+% \caption{Memory write miss times in a 1MB reuse cache during a simulation period of 300M instructions}
+% \label{table:writemiss}
+% \end{table}
+
+
+
+% \begin{table}[!htb]
+% \centering
+% \begin{tabular}{|l||r|}
+% \hline
+% L1 data cache size & 64KB\\
+% \hline
+% L1 data cache associativity & 4-way\\
+% \hline
+% L1 instruction cache size & 32KB\\
+% \hline
+% L1 instruction cache associativity & 4-way\\
+% \hline
+% L2 cache size & 1MB\\
+% \hline
+% L2 cache associativity & 8-way\\
+% \hline
+% Cache line size & 64B\\
+% \hline
+% Single memory size & 512 MB\\
+% \hline
+% \end{tabular}
+% \caption{System configurations for baseline performance}
+% \label{table:baselineconfig}
+% \end{table}
+
+
+% \begin{figure*}[!htb]
+% \centering
+% \epsfig{file=rc248.eps, width=7in}
+% \caption{Relative performace of reuse cache under varying data array sizes. The data array sizes for ratio 2, 4, 8 are 512KB, 256KB, 128KB, respectively.}
+% \label{fig:rc248}
+% \end{figure*}
+
+
+
+% \begin{figure}[!htb]
+% \centering
+% \epsfig{file=bzip2live.eps, width=3.4in}
+% \caption{bzip2 percentage of live lines during execution of workload. Sampling is once per 100K data accesses.}
+% \label{fig:bzip2live}
+% \end{figure}
+
+% \begin{figure*}[!htb]
+% \centering
+% \epsfig{file=addarray.eps, width=7in}
+% \caption{Relative performace of reuse cache under varying additional block array sizes. The additional block array sizes for ratio 16, 32, 64 are 64KB, 32KB, 16KB, respectively. No additional block array means a regular reuse cache design. All statistics are obtained when reuse cache tag/data ratio is 2.}
+% \label{fig:addarray}
+% \end{figure*}
+
+
+% \begin{table*}[!htb]
+% \centering
+% \begin{tabular}{|c||c|c|c|c|c|c|}
+% \hline
+% \multirow{2}{*}{\textbf{Benchmark}} & 
+% \multicolumn{2}{c|}{\textbf{Ratio 2}} & \multicolumn{2}{c}{\textbf{Ratio 4}} & \multicolumn{2}{|c|}{\textbf{Ratio 8}}\\
+% \cline{2-7}
+% & \textbf{Speedup} & \textbf{Miss Rate} & \textbf{Speedup} & \textbf{Miss Rate} & \textbf{Speedup} & \textbf{Miss Rate} \\ \hline
+% astar & 0.983 & 1.046 & 0.984 & 1.042 & 0.972 & 1.069\\ \hline 
+% bwaves & 0.923 & 1.064 & 0.935 & 1.079 & 0.945 & 1.067\\ \hline 
+% bzip2 & 0.858 & 1.114 & 0.833 & 1.112 & 0.820 & 1.154\\ \hline 
+% lbm & 0.966 & 1.010 & 0.974 & 0.981 & 0.973 & 0.982\\ \hline 
+% libquantum & 0.957 & 1.015 & 0.964 & 1.020 & 0.979 & 1.045\\ \hline 
+% mcf & 0.876 & 1.700 & 0.833 & 2.030 & 0.796 & 2.383\\ \hline 
+% milc & 0.988 & 1.016 & 0.989 & 1.021 & 0.992 & 1.014\\ \hline 
+% omnetpp & 0.973 & 1.689 & 0.940 & 3.202 & 0.848 & 8.054\\ \hline 
+% \textbf{Average} & \textbf{0.939} &\textbf{1.070} &\textbf{0.930} & \textbf{1.091} &\textbf{0.913} &\textbf{1.148}\\ \hline
+% \end{tabular}
+% \caption{Speedup and miss rate of workloads relative to baseline. Ths miss rate is a relative ratio compared with baseline miss rate.}
+% \label{table:missrate}
+% \end{table*}
