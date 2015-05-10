@@ -93,9 +93,9 @@ Combining these factors, we selected five hashtags, each having 1000 associated 
 \end{itemize}
 
 \subsection{Tweet Fetching}
-To facilitate publich usage and research, Twitter has publicized various APIs via which interested users can retrieve information from Twitter web server. There are two sets of Twitter APIs that we use. First, OAuth APIs are used to send secured authorized requests. We need to provide authentication and authorization information whenever we want to use Twitter API. This includes applying for a new application called Hashtag Prefetcher on the user profile and get a pair of Consumer Key and Consumer Secret for application and a pair of Access Key and Access Secret for user account. The second part, once authorized, is to make queries to server using the search API. The search API is part of Twitter REST API that return tweets satisfying a certain set of conditions such as posted time, hashtag, keyword, language, retweet count, etc. It is written in JSON and returns a series of Tweet objects.
+To facilitate publich usage and research, Twitter has publicized various APIs via which interested users can retrieve information from Twitter web server \cite{twitterdocument}. There are two sets of Twitter APIs that we use. First, OAuth APIs \cite{twitteroauth} are used to send secured authorized requests. We need to provide authentication and authorization information whenever we want to use Twitter API. This includes applying for a new application called Hashtag Prefetcher on the user profile and get a pair of Consumer Key and Consumer Secret for application and a pair of Access Key and Access Secret for user account. The second part, once authorized, is to make queries to server using the search API \cite{twittersearch}. The search API is part of Twitter REST API that return tweets satisfying a certain set of conditions such as posted time, hashtag, keyword, language, retweet count, etc. It is written in JSON and returns a series of Tweet objects.
 
-In our project, we use a simple Twitter API wrapper called 
+In our project, we use a simple Twitter API wrapper called tweepy \cite{tweepy}.
 
 \subsection{Data Preprocessing}
 After above steps, we get 5000 tweets with corresponding hashtags like this:

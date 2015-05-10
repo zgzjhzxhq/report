@@ -1,3 +1,13 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{1}
+
+\bibitem{blei2003latent}
+David~M Blei, Andrew~Y Ng, and Michael~I Jordan.
+\newblock Latent dirichlet allocation.
+\newblock {\em the Journal of machine Learning research}, 3:993--1022, 2003.
+
+\bibitem{salton1971smart}
+Gerard Salton and M~McGill.
+\newblock The smart retrieval system—experiments in automatic document
+  retrieval, 1971.
 
 \end{thebibliography}
