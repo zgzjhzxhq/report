@@ -33,7 +33,7 @@
   \and
   Lichao Yin\\
   Department of Computer Sciences\\
-  \texttt{lyin28@wisc.edu}
+  \texttt{lichao@cs.wisc.edu}
   \and
   Chaowen Yu\\
   Department of Computer Sciences\\
@@ -68,25 +68,53 @@ Given a $S$ set of candidate hashtags as class labels, and a set $T$ of tagged t
 
 We do not specify deliberately which machine learning model we will be using as long as it is supervised learning. This is because it is not clear at this moment which model has the best performance. We feel it is wise to explore various machine learning methods, compare their performances and find out which machine learning method is the most accurate on hashtag implication problem.
 
-The rest of our report is structures as follows: Section \ref{sec:data} 
+The rest of our report is structured as follows: Section \ref{sec:data} summarizes how we obtain training and testing data using Twitter API. Section \ref{sec:impl} introduces implementation details for various machine learning methods including decision tree, neural network, support vector machine, etc. Performances of these methods are compared and analyzed in Section \ref{sec:resu}. Finally Section \ref{sec:conc} concludes this paper with some possible future work.
 
 \section{Data Preparation}
 \label{sec:data}
-\subsection{Data Collection}
+
+\subsection{Hashtag Selection}
+Unlike many may conceive, topic selection is no easy task. To select a set of hashtag candidates, we consider several factors. First, a hashtag should have a unique textual form. If one topic can have multiple hashtag forms, it may not possible to classify a set of tweets because a tweet may be put into any hashtag class under the same topic. Effective classification is depending on disjoint hashtag classes thus disjoint topics. For example \texttt{\#butterfly} and \texttt{\#butterflies} have exactly the same meaning and may be used as hashtags interchangeably, and having a class for \texttt{\#butterfly} and another for \texttt{\#butterfiles} does not only undermine our classification, but also conflicts with our project initiatives.
+
+Second, a hashtag should have enough tweets for training. Too few tweets associated with a hashtag cannot fully characterize the hashtag and may not achieve effective training process. We think 1000 tweets for a hashtag are sufficient for training and testing. In reality, multiple hashtags are also possible. In this scenario we simply treat other hashtags as regular words and leave the only hashtag selected in our candidate set.
+
+Combining these factors, we selected five hashtags, each having 1000 associated tweets. They are
+\begin{itemize}
+\item
+\texttt{\#badgers}
+\item
+\texttt{\#baltimoreuprising}
+\item
+\texttt{\#gameofthrones}
+\item
+\texttt{\#love}
+\item
+\texttt{\#taylorswift}
+\end{itemize}
+
+\subsection{Tweet Fetching}
+To facilitate publich usage and research, Twitter has publicized various APIs via which interested users can retrieve information from Twitter web server. There are two sets of Twitter APIs that we use. First, OAuth APIs are used to send secured authorized requests. We need to provide authentication and authorization information whenever we want to use Twitter API. This includes applying for a new application called Hashtag Prefetcher on the user profile and get a pair of Consumer Key and Consumer Secret for application and a pair of Access Key and Access Secret for user account. The second part, once authorized, is to make queries to server using the search API. The search API is part of Twitter REST API that return tweets satisfying a certain set of conditions such as posted time, hashtag, keyword, language, retweet count, etc. It is written in JSON and returns a series of Tweet objects.
+
+In our project, we use a simple Twitter API wrapper called 
+
 \subsection{Data Preprocessing}
 After above steps, we get 5000 tweets with corresponding hashtags like this:
 \begin{framed}
-The House of Black and White - The Wars to Come - \#gameofthrones \#got \#got5 \#e2s5  \#hbo $\backslash$u2026 https://t.co/6zrQXilrZe
+\texttt{
+The House of Black and White - The Wars to Come - \#gameofthrones \textbf\#got \#got5 \#e2s5  \#hbo $\backslash$u2026 https://t.co/6zrQXilrZe
+}
 \end{framed}
-It is obvious that \emph{http://}, \emph{$\backslash$u2026} and \emph{\#gameofthrones} do little contribution to classification. So we find them out through 5000 tweets and remove them. For convinience, we then remove all non-alphanumeric characters and turn all letters to lowercase. Thus the example tweet turns to be:
+It is obvious that \texttt{http://}, \texttt{$\backslash$u2026} and \texttt{\#gameofthrones} do little contribution to classification. So we find them out through 5000 tweets and remove them. For convenience, we then remove all non-alphanumeric characters and turn all letters to lowercase. Thus the example tweet turns to be:
 \begin{framed}
+\texttt{
 the house of black and white the wars to come
+}
 \end{framed}
 Because computer usually fails to capture semantic information from human languages, it is common to represent a text as a vector corresponding to the terms(usually terms are words) that appear in the text. For our problem, we will use bag-of-words model. Here we define the following terms as denoted as \cite{blei2003latent}:
 \begin{itemize}
 \item A \emph{term} is the basic unit of discrete data denoted by $w$, which is usually a word appearing in a tweet.
 \item A \emph{tweet} contains $N$ terms, denoted by $\bfw = (w_1, w_2, \dots, w_N)$.
-\item A \emph{corpus} is a collection of $M$ tweets($M=5000$). The tweets texts are denoted by $\bfD = \{\bfw_1, \bfw_2, \dots, \bfw_M\}$, and their corresponding tag labels are denoted by $\bfY = \{y_1, y_2, \dots, y_M\}$ where $y_i \in \{1, 2, 3, 4, 5\}, i = 1, 2, \dots, M$. For our problem, 1 stands for the hashtag "", 2 stands for the hashtag "", 3 stands for the hashtag "", 4 stands for the hashtag "", and 5 stands for the hashtag "".
+\item A \emph{corpus} is a collection of $M$ tweets($M=5000$). The tweets texts are denoted by $\bfD = \{\bfw_1, \bfw_2, \dots, \bfw_M\}$, and their corresponding tag labels are denoted by $\bfY = \{y_1, y_2, \dots, y_M\}$ where $y_i \in \{1, 2, 3, 4, 5\}, i = 1, 2, \dots, M$. For our problem, 1 stands for the hashtag \texttt{badgers}, 2 stands for the hashtag \texttt{baltimoreuprising}, 3 stands for the hashtag \texttt{gameofthrones}, 4 stands for the hashtag \texttt{love}, and 5 stands for the hashtag \texttt{taylorswift}.
 \item A \emph{dictionary} is a collection of all $V$ unique terms appearing in the corpus denoted by $\bfW = \{w_1^*, w_2^*, \dots, w_V^*\}$.
 \end{itemize}
 
@@ -123,12 +151,19 @@ We use scikit-learn default configuration to finish our task. The default config
 \subsection{Random Forest}
 Random Forest is an ensemble method that produces a highly accurate classifier and learns fast. It runs efficiently on large data bases and handles large amount of input variables without variable deletion or selection.
 
-We download an Matlab implementation code from \emph{https://code.google.com/p/randomforest-matlab/}. For our problem we set the number of trees is 500 and the maximum trial times is 98.
+We download an Matlab implementation code from \emph{https://code.google.com/p/randomforest-matlab}. For our problem we set the number of trees is 500 and the maximum trial times is 98.
 
 \subsection{Neural Network}
 Neural networks are algorithms that can be used to perform nonlinear statistical modeling and provide a new alternative to logistic regression, the most commonly used method for developing predictive models. Neural network requires less formal statistical training and implicitly detects complex nonlinear relationships between dependent and independent variables.
 
-For our classification problem, we use neural network toolbox in matlab. We just use one hidden layer with size nou
+For our classification problem, we use neural network toolbox in matlab. We just use one hidden layer with 10 neurons and the other configurations are as follows:
+\begin{itemize}
+\item \emph{Data Division}: Random (dividerand)
+\item \emph{Training}: Scaled Conjugate Gradient (trainscg)
+\item \emph{Performance}: Cross-Entropy (crossentropy)
+\item \emph{Derivative}: Default (defaultderiv)
+\end{itemize}
+
 \subsection{Na{\"i}ve Bayes}
 The na{\"i}ve Bayes algorithm is one of the two classic na{\"i}ve Bayes variants used in text classification where the data are typically represented as word vector counts. The biggest advantages of na{\"i}ve Bayes is that it is super simple. Furthermore, sometimes even if the na{\"i}ve Bayes assumption doesn't hold, a na{\"i}ve Bayes classifier still often performs surprisingly well in practice.
 
@@ -144,21 +179,53 @@ The configuration we used in our project is the default one, which are as follow
 \subsection{Support Vector Machine}
 Advantages of SVMs: High accuracy, nice theoretical guarantees regarding overfitting, and with an appropriate kernel they can work well even if you're data isn't linearly separable in the base feature space. Especially popular in text classification problems where very high-dimensional spaces are the norm. Memory-intensive and kind of annoying to run and tune, though, so I think random forests are starting to steal the crown.
 
+SVM uses kernel trick to map inputs to higher dimension so that they can be linear classified.
+
+Parameters setting:
+\begin{itemize} 
+\item \emph{kernel function:} Gaussian function
+\item \emph{sigma:} number of features
+\end{itemize}
 
 \subsection{Logistic Regression Model}
-Advantages of Logistic Regression: Lots of ways to regularize your model, and you don't have to worry as much about your features being correlated, like you do in Naive Bayes. You also have a nice probabilistic interpretation, unlike decision trees or SVMs, and you can easily update your model to take in new data (using an online gradient descent method), again unlike decision trees or SVMs. Use it if you want a probabilistic framework (e.g., to easily adjust classification thresholds, to say when you're unsure, or to get confidence intervals) or if you expect to receive more training data in the future that you want to be able to quickly incorporate into your model.
+Logistic Regression can deal with binomial or multinomial classification problems. It can be seen a simplified version of sigmoid neural network without hidden layer. The result can be seen the confidence measure of every category.
 
-\subsection{$k$ Nearest Neighbors}
+Here we used LIBLINEAR to train and test the tweet data.
 
+\subsection{$k$-Nearest Neighbors}
+The k-Nearest Neighbors algorithm (or k-NN for short) is a non-parametric method. So we don't have to tune the model parameters. As an instanced-based algorithm where every prediction is dependent on local information, it is very sensitive to local structure.
+
+We used Matlab built-in kNN implementation \texttt{fitcknn} with $k = 1$ an $k = 5$.
 
 \section{Results}
-\label{sec:eval}
-% \begin{figure}[!htb]
-% \centering
-% \epsfig{file=evaluation.eps, width=3.4in}
-% \caption{Boot-up time for various configurations}
-% \label{figure:eval}
-% \end{figure}
+\label{sec:resu}
+In detail, we find something interesting to address. Even if na{\"i}ve Bayes is not the implementing algorithm with best performance, it indeed draws some outstanding predictions in some cases, which shows its availability and accuracy. For example, all other implementing algorithms predicts the following tweet as \texttt{love} and only na{\"i}ve Bayes predicts it as \texttt{badgers}.
+\begin{framed}
+\texttt{
+I may have cried when illustrating @AngelaSlatter's "Spells for Coming Forth By Daylight" http://t.co/9IMhTRLj49 #books #badgers #endings
+}
+\end{framed}
+Another thing that shall be addressed is that our dataset does have some noise. In our first dataset, we find that all implementing algorithms predict wrong for the 528th testing tweet. It shall belongs to the hashtag \texttt{gameofthrones}, but several algorithms treat it as \texttt{love}, \texttt{badgers} or \texttt{baltimoreuprising}. That's because the original content of the tweet is too simple and "common", which is
+\begin{framed}
+\texttt{
+Yep... we've all been there. $\backslash$ud83d$\backslash$ude29 http://t.co/XTucN2D4yx  \#ILoveMondays \#Sarcasm \#GameofThrones \#GoT \#Joffrey
+}
+\end{framed}
+It is obvious that this tweet contains no outstanding semantic terms which indicates \texttt{gameofthrones} meaning. And this case is not unique in our dataset, which affects the overall performance.
+
+\begin{figure*}[!htb]
+\centering
+\epsfig{file=acc.eps, scale=0.45}
+\caption{Boot-up time for various configurations}
+\label{figure:eval}
+\end{figure*}
+
+\begin{figure*}[!htb]
+\centering
+\epsfig{file=label.eps, scale=0.38}
+\caption{Boot-up time for various configurations}
+\label{figure:eval}
+\end{figure*}
 
 % \begin{figure*}[!htb]
 % \centering
@@ -174,10 +241,8 @@ Advantages of Logistic Regression: Lots of ways to regularize your model, and yo
 % \label{figure:throughput}
 % \end{figure*}
 
-\section{Related Works}
-\label{sec:related}
-\section{Future Work}
-\label{sec:future}
+\section{Conclusion}
+\label{sec:conc}
 
 % \bibliographystyle{abbrv}
 \bibliographystyle{plain}
