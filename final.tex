@@ -206,26 +206,9 @@ We used MATLAB built-in $k$NN implementation \texttt{fitcknn} with $k = 1$ an $k
 
 \section{Results}
 \label{sec:resu}
-<<<<<<< Updated upstream
 We use the 5 cross-validation datasets to test the above 7 classifier models and Figure \ref{fig:acc} shows the average prediction accuracy over these classifiers.
-=======
-In detail, we find something interesting to address. Even if na{\"i}ve Bayes is not the implementing algorithm with best performance, it indeed draws some outstanding predictions in some cases, which shows its availability and accuracy. For example, all other implementing algorithms predicts the following tweet as \texttt{love} and only na{\"i}ve Bayes predicts it as \texttt{badgers}.
-\begin{framed}
-\texttt{
-I may have cried when illustrating @AngelaSlatter's "Spells for Coming Forth By Daylight" http://t.co/9IMhTRLj49 \#books \#badgers \#endings
-}
-\end{framed}
-Another thing that shall be addressed is that our dataset does have some noise. In our first dataset, we find that all implementing algorithms predict wrong for the 528th testing tweet. It shall belongs to the hashtag \texttt{gameofthrones}, but several algorithms treat it as \texttt{love}, \texttt{badgers} or \texttt{baltimoreuprising}. That's because the original content of the tweet is too simple and "common", which is
-\begin{framed}
-\texttt{
-Yep... we've all been there. $\backslash$ud83d$\backslash$ude29 http://t.co/XTucN2D4yx  \#ILoveMondays \#Sarcasm \#GameofThrones \#GoT \#Joffrey
-}
-\end{framed}
-It is obvious that this tweet contains no outstanding semantic terms which indicates \texttt{gameofthrones} meaning. And this case is not unique in our dataset, which affects the overall performance.
->>>>>>> Stashed changes
 
 \begin{figure*}[!htb]
-% \begin{figure*}[h]
 \centering
 \epsfig{file=acc.eps, scale=0.45}
 \caption{Average Prediction Accuracies of 8 Algorithms}
