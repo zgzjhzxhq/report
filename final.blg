@@ -3,44 +3,57 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: final.aux
 The style file: plain.bst
 Database file #1: references.bib
-You've used 2 entries,
+Warning--entry type for "tweepy" isn't style-file defined
+--line 12 of file references.bib
+Warning--entry type for "twittersearch" isn't style-file defined
+--line 22 of file references.bib
+Warning--entry type for "twitteroauth" isn't style-file defined
+--line 33 of file references.bib
+Warning--entry type for "twitterdocument" isn't style-file defined
+--line 44 of file references.bib
+Warning--to sort, need author or key in twitterdocument
+Warning--to sort, need author or key in twitteroauth
+Warning--to sort, need author or key in twittersearch
+Warning--to sort, need author or key in tweepy
+You've used 6 entries,
             2118 wiz_defined-function locations,
-            509 strings with 4307 characters,
-and the built_in function-call counts, 623 in all, are:
-= -- 58
-> -- 31
+            518 strings with 4452 characters,
+and the built_in function-call counts, 1239 in all, are:
+= -- 110
+> -- 35
 < -- 0
-+ -- 13
++ -- 17
 - -- 10
-* -- 41
-:= -- 109
-add.period$ -- 5
-call.type$ -- 2
-change.case$ -- 11
+* -- 73
+:= -- 169
+add.period$ -- 9
+call.type$ -- 6
+change.case$ -- 23
 chr.to.int$ -- 0
-cite$ -- 2
-duplicate$ -- 18
-empty$ -- 50
+cite$ -- 10
+duplicate$ -- 46
+empty$ -- 142
 format.name$ -- 10
-if$ -- 125
+if$ -- 277
 int.to.chr$ -- 0
-int.to.str$ -- 2
+int.to.str$ -- 6
 missing$ -- 1
-newline$ -- 12
+newline$ -- 24
 num.names$ -- 4
-pop$ -- 14
+pop$ -- 50
 preamble$ -- 1
-purify$ -- 9
+purify$ -- 17
 quote$ -- 0
-skip$ -- 16
+skip$ -- 48
 stack$ -- 0
-substring$ -- 39
-swap$ -- 2
+substring$ -- 59
+swap$ -- 6
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 8
-warning$ -- 0
+type$ -- 24
+warning$ -- 4
 while$ -- 6
-width$ -- 3
-write$ -- 21
+width$ -- 7
+write$ -- 45
+(There were 8 warnings)

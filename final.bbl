@@ -1,5 +1,17 @@
 \begin{thebibliography}{1}
 
+\bibitem{tweepy}
+Tweepy, May 2015.
+
+\bibitem{twitterdocument}
+Twitter developers documentation, May 2015.
+
+\bibitem{twitteroauth}
+Twitter developers oauth, May 2015.
+
+\bibitem{twittersearch}
+Twitter developers the search api, May 2015.
+
 \bibitem{blei2003latent}
 David~M Blei, Andrew~Y Ng, and Michael~I Jordan.
 \newblock Latent dirichlet allocation.
@@ -7,7 +19,7 @@ David~M Blei, Andrew~Y Ng, and Michael~I Jordan.
 
 \bibitem{salton1971smart}
 Gerard Salton and M~McGill.
-\newblock The smart retrieval system—experiments in automatic document
+\newblock The smart retrieval system---experiments in automatic document
   retrieval, 1971.
 
 \end{thebibliography}
