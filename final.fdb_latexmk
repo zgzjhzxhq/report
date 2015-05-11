@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex final"] 1431232708 "final.aux" "final.bbl" "final" 1431232708
+["bibtex final"] 1431319653 "final.aux" "final.bbl" "final" 1431320046
   "/usr/local/texlive/2014/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "final.aux" 1431227985 3226 3a95b96d0f3dbc5cc2222b08707a3504 ""
+  "final.aux" 1431320046 3502 e55c86e7bdf9c27073a9c77a678396ce ""
   "final.bcf" 0 -1 0 ""
-  "references.bib" 1431232645 5878 42058eee1f294246c4d919aa4e66ebed ""
+  "references.bib" 1431319263 6200 434055de7911347f41f697642b296be5 ""
   (generated)
   "final.blg"
   "final.bbl"
-["pdflatex"] 1431227984 "final.tex" "final.pdf" "final" 1431232708
+["pdflatex"] 1431320045 "final.tex" "final.pdf" "final" 1431320046
   "/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii" 1337017135 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/local/texlive/2014/texmf-dist/tex/generic/ifxetex/ifxetex.sty" 1284331290 1458 43ab4710dc82f3edeabecd0d099626b2 ""
   "/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/gettitlestring.sty" 1303254447 8237 52810bdb4db2270e717422560a104aea ""
@@ -61,11 +61,12 @@
   "/usr/local/texlive/2014/texmf-dist/tex/latex/tools/multicol.sty" 1415144112 29416 71a0adafcb49c324fb68f97648633a9c ""
   "/usr/local/texlive/2014/texmf-dist/tex/latex/url/url.sty" 1388531844 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "acc.eps" 1431226394 24377 90a0d65b66b3f61ae7c83132577c02a1 ""
-  "final.aux" 1431227985 3226 3a95b96d0f3dbc5cc2222b08707a3504 ""
-  "final.bbl" 1431232708 625 b2b87d1ecfd4e56f6235b94e4a54585b "bibtex final"
-  "final.out" 1431227985 965 3cccc9724d98626b09974df3540da738 ""
-  "final.tex" 1431227982 21810 2b1f881b81823236f419922462e91eff ""
+  "final.aux" 1431320046 3502 e55c86e7bdf9c27073a9c77a678396ce ""
+  "final.bbl" 1431319653 694 cbf3af839062408815dfc2a76c82bcc8 "bibtex final"
+  "final.out" 1431320046 965 3cccc9724d98626b09974df3540da738 ""
+  "final.tex" 1431320045 29375 431e7edf5bd8acb140e44c8d1a1d3540 ""
   "label.eps" 1431226394 31897 db8aeaea3ec8f91fda0a85504d66c1de ""
+  "lc.eps" 1431319263 25061 250e80792fe8de679cde3e75da80dd67 ""
   "template.tex" 1431226394 2711 ed417b0612fc32330992e150e6039037 ""
   (generated)
   "final.out"

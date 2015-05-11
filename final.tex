@@ -20,7 +20,7 @@
 \def\bfX{\mathbf X}
 \def\F{\mathrm F}
 
-\title{\bf{Twitter HashTag Implication Using Various Machine Learning Methods}}
+\title{\bf{Twitter Hashtag Implication Using Various Machine Learning Methods}}
 \author{
   Chang Wang\\
   Department of Computer Sciences\\
@@ -78,7 +78,7 @@ The rest of our report is structured as follows: Section \ref{sec:data} summariz
 \label{sec:data}
 
 \subsection{Hashtag Selection}
-Unlike many may conceive, topic selection is no easy task. To select a set of hashtag candidates, we consider several factors. First, a hashtag should have a unique textual form. If one topic can have multiple hashtag forms, it may not possible to classify a set of tweets because a tweet may be put into any hashtag class under the same topic. Effective classification is depending on disjoint hashtag classes thus disjoint topics. For example \texttt{\#butterfly} and \texttt{\#butterflies} have exactly the same meaning and may be used as hashtags interchangeably, and having a class for \texttt{\#butterfly} and another for \texttt{\#butterfiles} does not only undermine our classification, but also conflicts with our project initiatives.
+Unlike many may conceive, topic selection is no easy task. To select a set of hashtag candidates, we consider several factors. First, a hashtag should have a unique textual form. If one topic can have multiple hashtag forms, it may not possible to classify a set of tweets because a tweet may be put into any hashtag class under the same topic. Effective classification is depending on disjoint hashtag classes thus disjoint topics. For example \texttt{\#butterfly} and \texttt{\#butterflies} have exactly the same meaning and may be used as hashtags interchangeably, and having a class for \texttt{\#butterfly} and another for \texttt{\#butterflies} does not only undermine our classification, but also conflicts with our project initiatives.
 
 Second, a hashtag should have enough tweets for training. Too few tweets associated with a hashtag cannot fully characterize the hashtag and may not achieve effective training process. We think 1000 tweets for a hashtag are sufficient for training and testing. In reality, multiple hashtags are also possible. In this scenario we simply remove all extraneous hashtags but the one selected in our candidate set.
 
@@ -97,9 +97,9 @@ Combining these factors, we selected five hashtags, each having 1000 associated 
 \end{itemize}
 
 \subsection{Tweet Fetching}
-To facilitate publich usage and research, Twitter has publicized various APIs via which interested users can retrieve information from Twitter web server \cite{twitterdocument}. There are two sets of Twitter APIs that we use. First, OAuth APIs \cite{twitteroauth} are used to send secured authorized requests. We need to provide authentication and authorization information whenever we want to use Twitter API. This includes applying for a new application called Hashtag Prefetcher on the user profile and get a pair of Consumer Key and Consumer Secret for application and a pair of Access Key and Access Secret for user account. The second part, once authorized, is to make queries to server using the search API \cite{twittersearch}. The search API is part of Twitter REST API that return tweets satisfying a certain set of conditions such as posted time, hashtag, keyword, language, retweet count, etc. It is written in JSON and returns a series of Tweet objects.
+To facilitate public usage and research, Twitter has publicized various APIs via which interested users can retrieve information from Twitter web server \cite{twitterdocument}. There are two sets of Twitter APIs that we use. First, OAuth APIs \cite{twitteroauth} are used to send secured authorized requests. We need to provide authentication and authorization information whenever we want to use Twitter API. This includes applying for a new application called Hashtag Prefetcher on the user profile and get a pair of Consumer Key and Consumer Secret for application and a pair of Access Key and Access Secret for user account. The second part, once authorized, is to make queries to server using the search API \cite{twittersearch}. The search API is part of Twitter REST API that return tweets satisfying a certain set of conditions such as posted time, hashtag, keyword, language, retweet count, etc. It is written in JSON and returns a series of Tweet objects.
 
-In our project, we use a simple Twitter API wrapper called tweepy \cite{tweepy}. Tweepy provides a python interface to communicate with Twitter API and shares the same query format as Twitte APIs. In our query, we use \texttt{tweepy.API.search} to obtain the first 1000 tweets containing a certain hashtag. To collect as many different tweets as possible, we require that those 1000 tweets are not retweeted from other tweets, i.e., 1000 original tweets. In this way, we sucessfully collected 1000 original tweets for each of five hashtags specified above.
+In our project, we use a simple Twitter API wrapper called tweepy \cite{tweepy}. Tweepy provides a python interface to communicate with Twitter API and shares the same query format as Twitter APIs. In our query, we use \texttt{tweepy.API.search} to obtain the first 1000 tweets containing a certain hashtag. To collect as many different tweets as possible, we require that those 1000 tweets are not retweeted from other tweets, i.e., 1000 original tweets. In this way, we successfully collected 1000 original tweets for each of five hashtags specified above.
 
 \subsection{Data Preprocessing}
 After above steps, we got 5000 tweets with corresponding hashtags like this:
@@ -148,7 +148,7 @@ We use scikit-learn default configuration to finish our task. The default config
 
 \begin{itemize}
 \item \emph{criterion}: Gini impurity function is used to measure the quality of a split.
-\item \emph{splitter strategy}: choose the “best” at when splitting.
+\item \emph{splitter strategy}: choose the "best" at when splitting.
 \item \emph{number of features to consider when looking for the best split}: consider max number of features at each split since all features are of integer type.
 \item \emph{maximum depth of the tree}: nodes are expanded until all leaves are pure or until all leaves contain less than a threshold.
 \item \emph{minimum number of samples for splitting}: The minimum number of samples required to split an internal node. Set to 2.
@@ -235,7 +235,7 @@ Figure \ref{fig:lc} shows the prediction accuracies of 5 algorithms we have chos
 \label{fig:lb}
 \end{figure*}
 
-From our statistic results, the hashtags chosen also have great impacts on the performances of each algorithms. Figure \ref{fig:lb} shows the average prediction accuracies of 8 different algorithms(configurations) on 5 different topics: badger, baltimoreuprising, taylorswift, gameofthrones and love. 1-NN, 5-NN, decision tree, logistic regression and na{\"i}ve Bayes have a obvious weakness in predicting love, which is to be expected, since love is a kind of common emotions that might appears in all the other topics. Surprisingly, random forest and SVM did quite well in predicting this tricky one. Topic \emph{gameofthrone} has the best prediction accuracy with almost the least stand deviation among all algorithms and configurations. The main reason why game of throne has such good result is that lots of proper noun like names of protagonists and name of places appear in almost every its related tweets, which distinguish these topic from others and therefore make predictions of this topic more accurate. Topic \emph{taylorswift} has very good average prediction accuracy but a large standard deviation as well. The major reason is that taylor-swift-related proper noun is not as many as game-of-thrones'. Some tweets might contain string implications like taylor's nick name or her songs' names so that sample datasets contains these kinds of words would have very high prediction accuracies. On the other hand, without the help of such strong implications, tweets of taylor swift are hard to distinguish with others.
+From our statistic results, the hashtags chosen also have great impacts on the performances of each algorithms. Figure \ref{fig:lb} shows the average prediction accuracies of 8 different algorithms(configurations) on 5 different topics: \texttt{\#badgers}, \texttt{\#baltimoreuprising}, \texttt{\#taylorswift}, \texttt{\#gameofthrones} and \texttt{\#love}. 1-NN, 5-NN, decision tree, logistic regression and na{\"i}ve Bayes have a obvious weakness in predicting love, which is to be expected, since love is a kind of common emotions that might appears in all the other topics. Surprisingly, random forest and SVM did quite well in predicting this tricky one. Topic \texttt{\#gameofthrones} has the best prediction accuracy with almost the least stand deviation among all algorithms and configurations. The main reason why game of throne has such good result is that lots of proper noun like names of protagonists and name of places appear in almost every its related tweets, which distinguish these topic from others and therefore make predictions of this topic more accurate. Topic \texttt{\#taylorswift} has very good average prediction accuracy but a large standard deviation as well. The major reason is that taylor-swift-related proper noun is not as many as game-of-thrones'. Some tweets might contain string implications like Taylor's nick name or her songs' names so that sample datasets contains these kinds of words would have very high prediction accuracies. On the other hand, without the help of such strong implications, tweets of taylor swift are hard to distinguish with others.
 
 Besides, we also find something interesting to address, specifically about some certain algorithm and tweets. Even if na{\"i}ve Bayes is not the implementing algorithm with best performance, it indeed draws some outstanding predictions in some cases, which shows its availability and accuracy. For example, all other implementing algorithms predicts the following tweet as \texttt{love} and only na{\"i}ve Bayes predicts it as \texttt{badgers}.
 \begin{framed}
@@ -243,13 +243,13 @@ Besides, we also find something interesting to address, specifically about some 
 I may have cried when illustrating @AngelaSlatter's "Spells for Coming Forth By Daylight" http://t.co/9IMhTRLj49 \#books \#badgers \#endings
 }
 \end{framed}
-Another thing that shall be addressed is that our dataset does have some noise. In $D^{(1)}$, we find that all implementing algorithms predict wrong for the 528th testing tweet. It shall belongs to the hashtag \texttt{gameofthrones}, but several algorithms treat it as \texttt{love}, \texttt{badgers} or \texttt{baltimoreuprising}. That's because the original content of the tweet is too simple and "common", which is
+Another thing that shall be addressed is that our dataset does have some noise. In $D^{(1)}$, we find that all implementing algorithms predict wrong for the 528th testing tweet. It shall belongs to the hashtag \texttt{\#gameofthrones}, but several algorithms treat it as \texttt{\#love}, \texttt{\#badgers} or \texttt{\#baltimoreuprising}. That's because the original content of the tweet is too simple and "common", which is
 \begin{framed}
 \texttt{
 Yep... we've all been there. $\backslash$ud83d$\backslash$ude29 http://t.co/XTucN2D4yx  \#ILoveMondays \#Sarcasm \#GameofThrones \#GoT \#Joffrey
 }
 \end{framed}
-It is obvious that this tweet contains no outstanding semantic terms which indicates \texttt{gameofthrones} meaning. And this case is not unique in our dataset, which affects the overall performance.
+It is obvious that this tweet contains no outstanding semantic terms which indicates \texttt{\#gameofthrones} meaning. And this case is not unique in our dataset, which affects the overall performance.
 
 % \begin{figure*}[!htb]
 % \centering
